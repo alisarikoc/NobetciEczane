@@ -9,7 +9,7 @@ import sys
 from tkinter import  Canvas
 from tkinter.constants import NW, TOP, X, Y
 from PIL import Image, ImageTk
-#from nob_ecz_bilgi_getir import wet
+from nob_ecz_bilgi_getir import wet
 
 try:
     import Tkinter as tk
@@ -69,21 +69,25 @@ class Toplevel1:
         top.title("New Toplevel")
         top.configure(background="#d9d9d9")
 
+        # Başlık Label
         self.nob_ecz = tk.Label(top)
         self.nob_ecz.place(relx=0.0, rely=0.0, height=94, width=800)
         self.nob_ecz.configure(background="#d9d9d9")
         self.nob_ecz.configure(disabledforeground="#a3a3a3")
         self.nob_ecz.configure(font="-family {Times New Roman} -size 14")
-        self.nob_ecz.configure(foreground="#000000")
-        self.nob_ecz.configure(text='''NÖBETÇİ ECZANELER2''')
+        self.nob_ecz.configure(foreground="#0000ff")
+        self.nob_ecz.configure(text='''NÖBETÇİ ECZANELER''')
 
+        # Nöbetçi eczane adı
         self.Label1 = tk.Label(top)
         self.Label1.place(relx=0.0, rely=0.157, height=41, width=232)
         self.Label1.configure(background="#d9d9d9")
         self.Label1.configure(disabledforeground="#a3a3a3")
+        self.Label1.configure(justify='left')
         self.Label1.configure(foreground="#000000")
-        self.Label1.configure(text='''NOBETÇİ ECZANE ADI''')
+        self.Label1.configure(text='''NOBETÇİ ECZANE ADI: \n'''+wet.nob_olan_ecz)
 
+        # Adres
         self.Label2 = tk.Label(top)
         self.Label2.place(relx=0.031, rely=0.217, height=67, width=200)
         self.Label2.configure(anchor='nw')
@@ -94,10 +98,10 @@ class Toplevel1:
         self.Label2.configure(highlightbackground="#f0f0f0f0f0f0")
         self.Label2.configure(justify='left')
         self.Label2.configure(takefocus="2")
-        self.Label2.configure(text='''Nöbetçi eczane adresi bilgiler uzun olacak ki alt satıra kaysın''')
-        self.Label2.configure(textvariable=excanedeneme_support.bu0)
+        self.Label2.configure(text='''Adres: '''+wet.nob_olan_ecz_adres+" "+wet.ek_adres_bilgisi)
         self.Label2.configure(wraplength="150")
 
+        # Telefon numarası
         self.Label3 = tk.Label(top)
         self.Label3.place(relx=0.031, rely=0.333, height=26, width=200)
         self.Label3.configure(anchor='w')
@@ -105,16 +109,16 @@ class Toplevel1:
         self.Label3.configure(disabledforeground="#a3a3a3")
         self.Label3.configure(foreground="#000000")
         self.Label3.configure(justify='left')
-        self.Label3.configure(text='''Tel :''')
-
+        self.Label3.configure(text='Tel: '+wet.nob_olan_ecz_telefon)
         self.Label4 = tk.Label(top)
         self.Label4.place(relx=0.031, rely=0.378, height=53, width=200)
         
+        # Nöbet tarihleri
         self.Label4.configure(anchor='nw')
         self.Label4.configure(background="#d9d9d9")
         self.Label4.configure(disabledforeground="#a3a3a3")
         self.Label4.configure(foreground="#000000")
-        self.Label4.configure(text='''Bugün saat / yarın saat arası nöbetçidir.''')
+        self.Label4.configure(text="Bugün "+wet.nob_olan_ecz_nobettarihleri)
         self.Label4.configure(wraplength="150")
 
         
@@ -122,10 +126,11 @@ class Toplevel1:
         self.canvas = tk.Canvas(top, width=500,height=400)
         self.canvas.place(relx=0.25,rely=0.25)
 
+        # Harita image
         load = Image.open("googlegunluk.jpeg")
         load= load.resize((500,400))
         self.canvas.image=ImageTk.PhotoImage(load)
-        self.canvas.create_image(50,50,image=self.canvas.image,anchor='nw')
+        self.canvas.create_image(0,0,image=self.canvas.image,anchor='nw')
  
   
 
