@@ -1,8 +1,7 @@
-from typing import KeysView
 from selenium import webdriver
 import time 
 import datetime
-import math
+import qrcode
 
 class nobet:
     def __init__(self):
@@ -56,9 +55,13 @@ class nobet:
         baslangic_noktasi.send_keys("Ahmet Vefik Paşa Mahallesi, Bursa Caddesi, No:45/2-A, Kestel/Bursa\n")
       
 
-        self.browser.find_element_by_xpath("//*[@id='pane']/div/div[3]/button").click() # Adres tabını kaybet
-        time.sleep(3) # Ekran oturana kadar 3 sn bekle
-        self.browser.save_screenshot(".\googlegunluk.jpeg")
+        self.browser.find_element_by_xpath("//*[@id='pane']/div/div[3]/button").click() # Adres tab'ını kapat
+        time.sleep(5) # Ekran oturana kadar 3 sn bekle
+        self.browser.save_screenshot(".\\resim\googlegunluk.jpeg")
+        barkod_Icin_Url=self.browser.current_url
+        imgg=qrcode.make(barkod_Icin_Url)
+        type(imgg)
+        imgg.save(".\\resim\QrCode.png")
 
 wet=nobet()
 wet.nob_ecz_bul()
