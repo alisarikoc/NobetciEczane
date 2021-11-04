@@ -7,9 +7,11 @@
 
 import sys
 from tkinter import  Canvas
-from tkinter.constants import NW, TOP, X, Y
+from tkinter.constants import BOTTOM, LEFT, NW, TOP, X, Y
 from PIL import Image, ImageTk
-from nob_ecz_bilgi_getir import wet
+
+# İnternet olmadığında örnek üzerinde çalışmak için (13-90-105-127-117). satırlar yorum haline getirilir.
+#from nob_ecz_bilgi_getir import wet
 
 try:
     import Tkinter as tk
@@ -39,7 +41,6 @@ def create_Toplevel1(rt, *args, **kwargs):
     '''Starting point when module is imported by another module.
        Correct form of call: 'create_Toplevel1(root, *args, **kwargs)' .'''
     global w, w_win, root
-    #rt = root
     root = rt
     w = tk.Toplevel (root)
     excanedeneme_support.set_Tk_var()
@@ -62,35 +63,37 @@ class Toplevel1:
         _ana1color = '#d9d9d9' # X11 color: 'gray85'
         _ana2color = '#ececec' # Closest X11 color: 'gray92'
 
-        top.geometry("800x600+450+189")
+        top.geometry("1400x700")
         top.minsize(120, 1)
         top.maxsize(3290, 1061)
         top.resizable(1,  1)
-        top.title("New Toplevel")
+        top.title("Nöbetçi Eczaneler")
         top.configure(background="#d9d9d9")
 
         # Başlık Label
         self.nob_ecz = tk.Label(top)
-        self.nob_ecz.place(relx=0.0, rely=0.0, height=94, width=800)
+        self.nob_ecz.pack()
         self.nob_ecz.configure(background="#d9d9d9")
         self.nob_ecz.configure(disabledforeground="#a3a3a3")
-        self.nob_ecz.configure(font="-family {Times New Roman} -size 14")
+        self.nob_ecz.configure(font="-family {Times New Roman} -size 20")
         self.nob_ecz.configure(foreground="#0000ff")
-        self.nob_ecz.configure(text='''NÖBETÇİ ECZANELER''')
+        self.nob_ecz.configure(text='''\nNÖBETÇİ ECZANELER''')
 
         # Nöbetçi eczane adı
         self.Label1 = tk.Label(top)
-        self.Label1.place(relx=0.0, rely=0.157, height=41, width=232)
+        self.Label1.place(relx=0.047, rely=0.157)
         self.Label1.configure(background="#d9d9d9")
         self.Label1.configure(disabledforeground="#a3a3a3")
         self.Label1.configure(justify='left')
         self.Label1.configure(foreground="#000000")
-        self.Label1.configure(text='''NOBETÇİ ECZANE ADI: \n'''+wet.nob_olan_ecz)
+        #self.Label1.configure(text='''NOBETÇİ ECZANE ADI: \n'''+wet.nob_olan_ecz)
+        self.Label1.configure(text='''NOBETÇİ ECZANE ADI: \n'''+"ŞULE ECZANESİ")
+
 
         # Adres
         self.Label2 = tk.Label(top)
         self.Label2.place(relx=0.031, rely=0.217, height=67, width=200)
-        self.Label2.configure(anchor='nw')
+        #self.Label2.configure(anchor='nw')
         self.Label2.configure(background="#d9d9d9")
         self.Label2.configure(compound='center')
         self.Label2.configure(disabledforeground="#a3a3a3")
@@ -98,27 +101,30 @@ class Toplevel1:
         self.Label2.configure(highlightbackground="#f0f0f0f0f0f0")
         self.Label2.configure(justify='left')
         self.Label2.configure(takefocus="2")
-        self.Label2.configure(text='''Adres: '''+wet.nob_olan_ecz_adres+" "+wet.ek_adres_bilgisi)
+        #self.Label2.configure(text='''Adres: '''+wet.nob_olan_ecz_adres+" "+wet.ek_adres_bilgisi)
+        self.Label2.configure(text='''Adres: '''+"UĞUR MUMCU BULVARI KARİNA EVLERİ NO2 D25 NİLÜFER BURSA")
         self.Label2.configure(wraplength="150")
 
         # Telefon numarası
         self.Label3 = tk.Label(top)
         self.Label3.place(relx=0.031, rely=0.333, height=26, width=200)
-        self.Label3.configure(anchor='w')
+        #self.Label3.configure(anchor='w')
         self.Label3.configure(background="#d9d9d9")
         self.Label3.configure(disabledforeground="#a3a3a3")
         self.Label3.configure(foreground="#000000")
         self.Label3.configure(justify='left')
-        self.Label3.configure(text='Tel: '+wet.nob_olan_ecz_telefon)
+        #self.Label3.configure(text='Tel: '+wet.nob_olan_ecz_telefon)
+        self.Label3.configure(text='Tel: '+"02244244224")
         self.Label4 = tk.Label(top)
         self.Label4.place(relx=0.031, rely=0.378, height=53, width=200)
         
         # Nöbet tarihleri
-        self.Label4.configure(anchor='nw')
+        #self.Label4.configure(anchor='nw')
         self.Label4.configure(background="#d9d9d9")
         self.Label4.configure(disabledforeground="#a3a3a3")
         self.Label4.configure(foreground="#000000")
-        self.Label4.configure(text="Bugün "+wet.nob_olan_ecz_nobettarihleri)
+        #self.Label4.configure(text="Bugün "+wet.nob_olan_ecz_nobettarihleri)
+        self.Label4.configure(text="Bugün "+"SAAT 18.00DAN İTİBAREN ŞULE ECZANESİ NÖBET HALİNDE AÇIK OLACAKTIR.")
         self.Label4.configure(wraplength="150")
 
         
@@ -126,6 +132,7 @@ class Toplevel1:
         self.canvas = tk.Canvas(top, width=500,height=400)
         self.canvas.place(relx=0.25,rely=0.25)
 
+        # Güncellenmeli!!!!!!
         # Harita image
         load = Image.open("googlegunluk.jpeg")
         load= load.resize((500,400))
