@@ -27,6 +27,7 @@ class nobet:
         self.nob_olan_ecz=self.browser.find_element_by_xpath("/html/body/div[1]/div/div[2]/div/div[3]/div/div/div[2]/h4").text
         self.nob_olan_ecz_bilgi=(self.browser.find_element_by_xpath("/html/body/div[1]/div/div[2]/div/div[3]/div/div/div[2]/p")).text.split("\n")
 
+        
         self.nob_olan_ecz_adres = self.nob_olan_ecz_bilgi[0]
         self.ek_adres_bilgisi = ""
         i = 1
@@ -37,7 +38,7 @@ class nobet:
         except:
             self.nob_olan_ecz_telefon = self.nob_olan_ecz_bilgi[i]
 
-        self.nob_olan_ecz_nobettarihleri = self.nob_olan_ecz_bilgi[-1]
+        self.nob_olan_ecz_nobettarihleri = self.nob_olan_ecz_bilgi[-1].partition("arası nöbetçidir.")[0]
 
         #self.nob_olan_ecz_googlelink=self.browser.find_element_by_css_selector("body > div.wrapper > div > div:nth-child(2) > div > div:nth-child(4) > div > div > div.col-md-10 > p > a:nth-child(7)").get_attribute('href')
         time.sleep(1)
@@ -55,13 +56,15 @@ class nobet:
         baslangic_noktasi.send_keys("Ahmet Vefik Paşa Mahallesi, Bursa Caddesi, No:45/2-A, Kestel/Bursa\n")
       
 
+        self.browser.find_element_by_xpath("//*[@id='omnibox-directions']/div/div[2]/div/div/div[1]/div[2]/button").click() # Adres tab'ında Araba buttonuna tıkla
         self.browser.find_element_by_xpath("//*[@id='pane']/div/div[3]/button").click() # Adres tab'ını kapat
         time.sleep(5) # Ekran oturana kadar 3 sn bekle
-        self.browser.save_screenshot(".\\resim\googlegunluk.jpeg")
+        self.browser.save_screenshot(".\\resim\googlegunluk.png")
         barkod_Icin_Url=self.browser.current_url
         imgg=qrcode.make(barkod_Icin_Url)
         type(imgg)
         imgg.save(".\\resim\QrCode.png")
+        self.browser.close()
 
 wet=nobet()
 wet.nob_ecz_bul()
